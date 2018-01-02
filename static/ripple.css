@@ -50,6 +50,7 @@
 	z-index: 1000001; /* getting bigger every year */
 }
 
+
 .main.wrapper {
 	padding-bottom: 30px;
 	background-attachment: fixed;
@@ -183,10 +184,10 @@ body.ds .white.background {
 }
 
 .subtitle, .about.title {
-	color: rgba(0,0,0,.6);
+	color: rgba(255,255,255,.6);
 }
 .subtitle b {
-	color: rgba(0,0,0,.87);
+	color: rgba(255,255,255,.87);
 }
 
 /* ds = Dark Site */
@@ -380,4 +381,28 @@ a.camouflaged:hover {
 }
 .avatar-cell > img {
 	margin: 0 auto;
+}
+
+
+
+.owner
+{
+    color: SpringGreen;
+    text-shadow:
+    -1px -1px 0 #006400,
+    1px -1px 0 #006400,
+    -1px 1px 0 #006400,
+    1px 1px 0 #006400;
+    
+}
+
+.dev
+{
+    color: DodgerBlue;
+    text-shadow:
+    -1px -1px 0 #104e8b,
+    1px -1px 0 #104e8b,
+    -1px 1px 0 #104e8b,
+    1px 1px 0 #104e8b;
+    
 }

@@ -231,14 +231,17 @@ var singlePageSnippets = {
       rates = data;
       us.on('update', function() {
         var months = us.get();
-        var priceUSD = Math.pow(months * 30 * 0.2, 0.70);
+        var priceEUR = Math.pow(months * 30 * 0.2, 0.70);
         $("#cost").html(
           T("<b>{{ months }}</b> month costs <b>$ {{ usd }}</b>", {
             count: Math.round(+months),
             months: (+months).toFixed(0),
             usd: priceUSD.toFixed(2),
           }) +
-          "<br>"
+          "<br>" +
+          T("($ {{ eur }})", {
+            eur: priceEUR.toFixed(2),
+          })
         );
         $("input[name='os0']").attr("value", (+months).toFixed(0) + " month" + (months == 1 ? "" : "s"));
         $("#paypal-amt").val(priceUSD.toFixed(2));
@@ -423,8 +426,9 @@ $(document).ready(function(){
   $.timeago.settings.allowFuture = true;
   $("time.timeago").timeago();
 
-  // It's christmas again!
-  $(".huge.heading").snowfall({flakeCount: 50, maxSpeed: 1, minSpeed: 1, minSize: 6, round: true, shadow: true});
+
+// It's christmas again!
+ $(".huge.heading").snowfall({flakeCount: 50, maxSpeed: 1, minSpeed: 1, minSize: 6, round: true, shadow: true});
 
   // dark site
   new Konami(function() {

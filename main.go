@@ -44,6 +44,7 @@ var (
 		BaseURL     string
 		API         string
 		BanchoAPI   string
+		CheesegullAPI string
 		APISecret   string
 		Offline     bool `description:"If this is true, files will be served from the local server instead of the CDN."`
 
@@ -116,6 +117,7 @@ func main() {
 		&config.AvatarURL:        "https://a.osu.akatsuki.pw",
 		&config.BaseURL:          "https://osu.akatsuki.pw",
 		&config.BanchoAPI:        "https://c.osu.akatsuki.pw",
+		&config.CheesegullAPI:    "https://storage.ripple.moe/api",
 		&config.API:              "http://localhost:40001/api/v1/",
 		&config.APISecret:        "Potato",
 		&config.IP_API:           "https://ip.zxq.co",
@@ -271,6 +273,7 @@ func generateEngine() *gin.Engine {
 	r.GET("/register/welcome", welcome)
 
 	r.GET("/u/:user", userProfile)
+	r.GET("/b/:bid", beatmapInfo)
 
 	r.POST("/pwreset", passwordReset)
 	r.GET("/pwreset/continue", passwordResetContinue)

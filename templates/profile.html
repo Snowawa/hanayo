@@ -12,11 +12,12 @@
 			{{ if after .silence_info.end }}
 				<div class="ui error centered message">{{ $global.T "User is <b>silenced</b> for %s, expires %s." (.silence_info.reason | htmlescaper) (time .silence_info.end) | html }}</div>
 			{{ end }}
-			
+						
+			{{ $cmyui  := has .id 1001 }}
 			{{ $solis  := has .id 1000 }}
 			{{ $charlotte  := has .id 999 }}
 			
-			{{ $cmyui := has .privileges 7340031 }}
+			{{ $super := has .privileges 7340031 }}
 			{{ $dev  := has .privileges 3129343 }}
 			{{ $admin  := has .privileges 3047935 }}
 			{{ $chatmod  := has .privileges 786763 }}
@@ -40,13 +41,6 @@
 					<div class="ui error centered message">{{ $global.T "User is <b>%s</b>" "locked" | html }}.</div>
 				{{ end }}
 			{{ end }}
-
-			
-			
-			
-			
-			
-			
 			{{ with $global.Get "users/userpage?id=%.0f" .id }}
 				{{ if .userpage }}
 					{{ with parseUserpage .userpage }}
@@ -89,8 +83,47 @@
 					
 					</div>
 				</center>
-
-			{{else}}
+			{{ else if $cmyui }}
+			<center>		
+			<div class="ui top attached segment overflow auto">
+					<div class="magic table">
+						<div class="table element">
+							{{ if eq $global.UserID $global.Context.User.ID }}
+								<a href="/settings/avatar">
+							{{ end }}
+									<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="avatar" class="user avatar">
+							{{ if eq $global.UserID $global.Context.User.ID }}
+								</a>
+							{{ end }}
+						</div>
+						
+						<div class="table element">
+							<h1 class="ui header">
+								{{ .username }}	
+							</h1>
+							{{ if .username_aka }}
+								<div class="subtitle">
+									{{ $global.T "(aka <b>%s</b>)" (.username_aka | htmlescaper) | html }}
+								</div>
+							{{ end }}
+							{{ with bget "isOnline?id=%.0f" .id }}
+								<div class="subtitle">
+									<i class="{{ if .result }}blue{{ else }}grey{{ end }} circle icon"></i>
+									{{ if .result }}{{ $global.T "Online" }}{{ else }}{{ $global.T "Offline" }}{{ end }}
+								</div>
+							{{ end }}
+						</div>
+					
+					</div>
+					<div class="magic table">
+						<div class="table element">
+							<h3 class="ui header">
+								Hi! If you're looking for support, please contact me either on discord @cmyui#5585, or by email at cmyuisuki@gmail.com
+							</h3>
+						</div>
+					</div>
+				</center>
+			{{ else }}
 			<div class="ui top attached segment overflow auto">
 				<div class="magic table">
 					<div class="table element">
@@ -104,7 +137,7 @@
 					</div>
 					<div class="table element">
 						<h1 class="ui header">
-						{{ if $cmyui }}
+						{{ if $super }}
 						<div class="owner">
 							{{ .username }}
 						</div>
@@ -131,6 +164,7 @@
 				</div>
 				{{end}}
 				{{ if $charlotte }}
+				{{ else if $cmyui }}
 				{{else}}
 				<div class="magic table floating right">
 					<div class="table element">
@@ -155,6 +189,7 @@
 			</div>
 			{{ $user := . }}
 			{{ if $charlotte }}
+			{{ else if $cmyui }}
 			{{else}}
 			<div class="ui four item bottom attached menu" id="mode-menu">
 				{{ range $k, $v := modes }}
@@ -163,12 +198,13 @@
 			</div>
 			{{end}}
 			{{ if $charlotte }}
+			{{ else if $cmyui }}
 			{{else}}
 			<div class="ui segment">
 				<div class="ui three column divided stackable grid">
 					<div class="row">
 						<div class="column">
-							{{ if $cmyui }}
+							{{ if $super }}
 								{{ $global.T "<b>%s</b> " .username | html }}
 								 is an <i class="red code small icon"></i><b>Owner</b> 
 								{{ $global.T " from <b>%s</b>." (country .country true) | html }}
@@ -279,26 +315,8 @@
 				</div>
 			</div> <!-- end grid segment -->
 			{{end}}
-			{{ if $solis }}
-			<div class="ui segment">
-			<div class="column">
-					{{ range $k, $v := (slice .std .taiko .ctb .mania) }}
-					<div data-mode="{{ $k }}" {{ if ne $k (int $favouritemode) }} hidden{{ end }}>
-						
-								<center>
-							
-									<td><img src="https://osu.gatari.pw/images/ranks/ss.png" class="score rank" alt="SS"></td>
-									<td><img src="https://osu.gatari.pw/images/ranks/s.png" class="score rank" alt="S"></td>
-									<td><img src="https://osu.gatari.pw/images/ranks/a.png" class="score rank" alt="A"></td>
-									<p>coding god solis</p>
-								</center>
-						</table>
-					</div>
-				{{ end }}
-			</div>
-		</div>
-		{{ end }}
 		{{ if $charlotte }}
+		{{ else if $cmyui }}
 		{{else}}
 
 			<div id="scores-zone">
@@ -314,8 +332,8 @@
 					</table>
 				</div>
 			</div>
-		{{end}}	
 		{{ end }}
-	{{ end }}
+		{{ end }}
+		{{ end }}
 </div>
 {{ end }}
