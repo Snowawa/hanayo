@@ -50,80 +50,6 @@
 					{{ end }}
 				{{ end }}
 			{{ end }}
-			{{ if $charlotte }}
-			<center>		
-			<div class="ui top attached segment overflow auto">
-					<div class="magic table">
-						<div class="table element">
-							{{ if eq $global.UserID $global.Context.User.ID }}
-								<a href="/settings/avatar">
-							{{ end }}
-									<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="avatar" class="user avatar">
-							{{ if eq $global.UserID $global.Context.User.ID }}
-								</a>
-							{{ end }}
-						</div>
-						
-						<div class="table element">
-							<h1 class="ui header">
-								{{ .username }}	
-							</h1>
-							{{ if .username_aka }}
-								<div class="subtitle">
-									{{ $global.T "(aka <b>%s</b>)" (.username_aka | htmlescaper) | html }}
-								</div>
-							{{ end }}
-							{{ with bget "isOnline?id=%.0f" .id }}
-								<div class="subtitle">
-									<i class="{{ if .result }}blue{{ else }}grey{{ end }} circle icon"></i>
-									{{ if .result }}{{ $global.T "Online" }}{{ else }}{{ $global.T "Offline" }}{{ end }}
-								</div>
-							{{ end }}
-						</div>
-					
-					</div>
-				</center>
-			{{ else if $cmyui }}
-			<center>		
-			<div class="ui top attached segment overflow auto">
-					<div class="magic table">
-						<div class="table element">
-							{{ if eq $global.UserID $global.Context.User.ID }}
-								<a href="/settings/avatar">
-							{{ end }}
-									<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="avatar" class="user avatar">
-							{{ if eq $global.UserID $global.Context.User.ID }}
-								</a>
-							{{ end }}
-						</div>
-						
-						<div class="table element">
-							<h1 class="ui header">
-								{{ .username }}	
-							</h1>
-							{{ if .username_aka }}
-								<div class="subtitle">
-									{{ $global.T "(aka <b>%s</b>)" (.username_aka | htmlescaper) | html }}
-								</div>
-							{{ end }}
-							{{ with bget "isOnline?id=%.0f" .id }}
-								<div class="subtitle">
-									<i class="{{ if .result }}blue{{ else }}grey{{ end }} circle icon"></i>
-									{{ if .result }}{{ $global.T "Online" }}{{ else }}{{ $global.T "Offline" }}{{ end }}
-								</div>
-							{{ end }}
-						</div>
-					
-					</div>
-					<div class="magic table">
-						<div class="table element">
-							<h3 class="ui header">
-								Hi! If you're looking for support, please contact me either on discord @cmyui#5585, or by email at cmyuisuki@gmail.com
-							</h3>
-						</div>
-					</div>
-				</center>
-			{{ else }}
 			<div class="ui top attached segment overflow auto">
 				<div class="magic table">
 					<div class="table element">
@@ -162,10 +88,6 @@
 						{{ end }}
 					</div>
 				</div>
-				{{end}}
-				{{ if $charlotte }}
-				{{ else if $cmyui }}
-				{{else}}
 				<div class="magic table floating right">
 					<div class="table element">
 						{{ range $k, $v := (slice .std .taiko .ctb .mania) }}
@@ -185,21 +107,13 @@
 						</div>
 					</div>
 				</div>
-				{{end}}
 			</div>
 			{{ $user := . }}
-			{{ if $charlotte }}
-			{{ else if $cmyui }}
-			{{else}}
 			<div class="ui four item bottom attached menu" id="mode-menu">
 				{{ range $k, $v := modes }}
 					<a class="{{ favMode $favouritemode $k }}item" data-mode="{{ $k }}" href="/u/{{ $user.id }}?mode={{ $k }}">{{ $v }}</a>
 				{{ end }}
 			</div>
-			{{end}}
-			{{ if $charlotte }}
-			{{ else if $cmyui }}
-			{{else}}
 			<div class="ui segment">
 				<div class="ui three column divided stackable grid">
 					<div class="row">
@@ -314,10 +228,6 @@
 					</div>
 				</div>
 			</div> <!-- end grid segment -->
-			{{end}}
-		{{ if $charlotte }}
-		{{ else if $cmyui }}
-		{{else}}
 
 			<div id="scores-zone">
 				{{ range _range 4 }}
@@ -332,7 +242,6 @@
 					</table>
 				</div>
 			</div>
-		{{ end }}
 		{{ end }}
 		{{ end }}
 </div>

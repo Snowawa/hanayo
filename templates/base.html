@@ -28,17 +28,19 @@
 			{{ template "navbar" . }}
 			{{ if not .DisableHH }}
 				<div class="huge heading {{ if .HeadingOnRight }}right{{ end }} dropped"
-					style="background-image: url('/static/headers/{{ or .KyutGrill "default.jpg" }}');">
-					<h1>{{ if .HeadingTitle }}{{ .T .HeadingTitle | html }}{{ else }}{{ .T .TitleBar }}{{ end }}</h1>
+					style="background-image: url('{{ if .KyutGrillAbsolute }}{{ .KyutGrill }}{{ else }}/static/headers/{{ or .KyutGrill "default.jpg" }}{{ end }}');">
+					<div class="ui container">
+						<h1>{{ if .HeadingTitle }}{{ .T .HeadingTitle | html }}{{ else }}{{ .T .TitleBar }}{{ end }}</h1>
+					</div>
 				</div>
 			{{ end }}
 
 			<div class="h-container">
 				<div class="ui margined container" id="messages-container">
-				<noscript>Research has proven this website works 10000% better if you have JavaScript enabled.</noscript>
+				<noscript>Research has proven this website works probably more than 7% better if you have JavaScript enabled.</noscript>
 				{{ if and .Context.User.Username (not (has .Context.User.Privileges 1)) }}
 					<div class="ui warning message">
-						{{ $.T "Your account is currently in restricted mode. You will not be able to do certain actions, and your profile can only be seen by you and by Akatsuki's staff. If you believe we have mistaken putting you in restricted mode, or a month has passed since you first saw this, then you can send an appeal at <a href='mailto:cmyuisuki@gmail.com'>cmyuisuki@gmail.com</a>." | html }}
+						{{ $.T "Your account is currently in restricted mode. You will not be able to perform certain actions, and your profile can only be seen by you and by Akatsuki's staff. If you believe this was a mistake, or a month has passed since you first saw this, then you can send an appeal to <a href=mailto:support@akatsuki.pw>support@akatsuki.pw." | html }}
 					</div>
 				{{ end }}
 				{{ if .Messages }}
@@ -73,7 +75,7 @@
 		</div>
 
 		<div class="footer">
-			{{ .T "&copy; %d Akatsuki, using Hanayo %s." (curryear) (version) | html }}
+			{{ .T "&copy; %d Ripple, Akatsuki, using Hanayo %s." (curryear) (version) | html }}
 			<a href="/team" title="{{ .T "Who is working on this thing?" }}"><i class="users icon"></i>{{ .T "Team" }}</a> |
 			<a href="/changelog" title="{{ .T "See what changed!" }}"><i class="bug icon"></i>{{ .T "Changelog" }}</a> |
 			<div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">

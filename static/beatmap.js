@@ -1,9 +1,8 @@
 (function() {
-  var mapset = Object();
-  for (var i = 0; i < setData.ChildrenBeatmaps.length; ++i) {
-    var diff = setData.ChildrenBeatmaps[i];
+  var mapset = {};
+  setData.ChildrenBeatmaps.forEach(function(diff) {
     mapset[diff.BeatmapID] = diff;
-  }
+  });
   console.log(mapset);
   function loadLeaderboard(b, m) {
     var wl = window.location;
@@ -79,3 +78,69 @@
       loadLeaderboard(beatmapID, currentMode);
     });
 })();
+var modbits = {
+  nomod : 0,
+  nf : 1 << 0,
+  ez : 1 << 1,
+  ts : 1 << 2,
+  hd : 1 << 3,
+  hr : 1 << 4,
+  dt : 1 << 6,
+  ht : 1 << 8,
+  nc : 1 << 9,
+  fl : 1 << 10,
+  so : 1 << 12,
+};
+modbits.from_string = function(str) {
+  var mask = 0;
+  str = str.toLowerCase();
+  for (var property in modbits) {
+    if (property.length != 2) {
+      continue;
+    }
+    if (!modbits.hasOwnProperty(property)) {
+      continue;
+    }
+    if (str.indexOf(property) >= 0) {
+      mask |= modbits[property];
+    }
+  }
+  return mask;
+};
+modbits.string = function(mods) {
+  var res = Array();
+  for (var property in modbits) {
+    if (property.length != 2) {
+      continue;
+    }
+    if (!modbits.hasOwnProperty(property)) {
+      continue;
+    }
+    if (mods & modbits[property]) {
+      res.push(property.toUpperCase());
+    }
+  }
+  return res.join(",");
+};
+// time format (seconds -> hh:mm:ss notation)
+function timeFormat(t) {
+  var h = Math.floor(t / 3600);
+  t %= 3600;
+  var m = Math.floor(t / 60);
+  var s = t % 60;
+  var c = "";
+  if (h > 0) {
+    c += h + ":";
+    if (m < 10) {
+      c += "0";
+    }
+    c += m + ":";
+  } else {
+    c += m + ":";
+  }
+  if (s < 10) {
+    c += "0";
+  }
+  c += s;
+  return c;
+}

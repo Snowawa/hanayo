@@ -314,7 +314,7 @@ function getScoreMods(m, noplus) {
 var modsString = [
   "NF",
 	"EZ",
-	"NV",
+	"TS",
 	"HD",
 	"HR",
 	"SD",

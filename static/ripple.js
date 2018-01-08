@@ -472,7 +472,7 @@ function api(endpoint, data, success, failure, post) {
     failure = undefined;
   }
 
-  var errorMessage = "An error occurred while contacting the Ripple API. Please report this to a Ripple developer.";
+  var errorMessage = "An error occurred while contacting the Akatsuki API. Please report this to a developer.";
 
   $.ajax({
     method:   (post ? "POST" : "GET"),
