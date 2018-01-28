@@ -21,7 +21,7 @@ KyutGrill=team2.jpg
 			<h1 class="ui heading">{{ .T "Community Managers" }}</h1>
 			<p>
 				{{ .T "Community Managers deal with bans, silences, name changes and pretty much everything that has to do with the community." }}<br>
-				{{ .T "They take care of our Discord server and reply to emails sent to <a href='mailto:cmyuiosu@gmail.com'>cmyuiosu@gmail.com</a>. Community Managers have a red name in the in-game chat." | html }}
+				{{ .T "They take care of our Discord server and reply to emails sent to <a href='mailto:support@akatsuki.pw'>support@akatsuki.pw</a>. Community Managers have a red name in the in-game chat." | html }}
 			</p>
 			{{ template "userGroup" (.Get "badges/members?id=%d" 4) }}
 		</div>
@@ -56,7 +56,7 @@ KyutGrill=team2.jpg
 		<div class="ui segment">
 			<ul class="ui list">
 				<li>{{ .T "<b><a href='http://ripple.moe/'>Ripple</a></b>, for the software to host Akatsuki" | html }}</li>
-				<li>{{ .T "<b><a id='everyone' class='clickable'>Everyone</a></b> who has supported Akatsuki by donating or inviting other people." | html }}</li>
+				<li>{{ .T "<b><a id='everyone' class='clickable'>Everyone</a></b> who has supported Akatsuki by donating." | html }}</li>
 			</ul>
 		</div>
 	</div>
@@ -64,30 +64,17 @@ KyutGrill=team2.jpg
 	{{ .T "Looking for how you should contact our team? Check out <a href='/help'>this page</a>." | html }}
 	<div class="ui modal">
 		<div class="header"><h2 class="ui header">{{ .T "They told me these are very cool people." }}</h2></div>
-		{{ with .Get "users?sort=donor_expire,desc&l=52" }}
 			<div class="content">
-				<div class="ui four column grid">
-					{{ range .users }}
-						<div class="column">
-							<h4 class="ui image header">
-								<img src="{{ config "AvatarURL" }}/{{ .id }}" class="ui micro rounded image">
-								<div class="content">
-									<a href="/u/{{ .id }}">{{ .username }}</a>
-								</div>
-							</h4>
-						</div>
-					{{ end }}
-				</div>
+				{{ template "userGroup" (.Get "badges/members?id=%d" 36) }}
 				<!-- Probably most shit coded part of Hanayo -->
 				<br>
 				<div class="centered">
-					<b>{{ $.T "And more..." }}</b><br><br>
+					<br><br>
 					<b>{{ $.T "Do you want to be in this list?" }}</b><br>
 					<a href="/donate"><b>{{ $.T "Support us with a donation!" }}</b></a><br>
 					<i>{{ $.T "(You get other cool perks too)" }}</i>
 				</div>
 			</div>
-		{{ end }}
 	</div>
 </div>
 {{ end }}
