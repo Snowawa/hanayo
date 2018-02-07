@@ -5,7 +5,7 @@
 <div class="ui secondary fixed-height stackable black background main menu no margin bottom{{ if .DisableHH }} dropped{{ end }}" id="navbar">
 	<div class="ui container">
 		<div class="item">
-			<b><a href="/" title="{{ .T "Home page" }}"><img class="ripple logo" src="/static/logos/text-{{ if $ds }}white{{ else }}white{{ end }}.png" alt="Ripple"></a></b>
+			<b><a href="/" title="{{ .T "Home page" }}"><img class="ripple logo" src="/static/logos/text-white.png" alt="Ripple"></a></b>
 		</div>
 		{{ if $isRAP }}
 			{{/*
@@ -19,18 +19,15 @@
 			<div class="ui dropdown item">
 				<span>{{ .T "Information" }}</span>
 				<div class="menu">
+					{{ navbarItem .Path (.T "Discord") "https://discord.gg/5cBtMPW" }}
+					<div class="divider"></div>
 					{{ navbarItem .Path (.T "Source Code") "https://github.com/osuAkatsuki" }}
 					<div class="divider"></div>
 					{{ navbarItem .Path (.T "Contact support") "/help" }}
 				</div>
 			</div>
 			{{ if .Context.User.Username }}
-			<div class="ui dropdown item">
-				<span>{{ .T "Beatmaps" }}</span>
-				<div class="menu">
-					{{ navbarItem .Path (.T "Request beatmap ranking") "/beatmaps/rank_request" }}
-				</div>
-			</div>
+			{{ navbarItem .Path (.T "Beatmaps") "/beatmaps/rank_request" }}
 			{{ end }}
 			{{ navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "/donate" }}
 			{{ navbarItem .Path (.T "Download Switcher" | printf "<i class=\"blue cloud download icon\"></i>%s") "/static/switcher.exe" }}
