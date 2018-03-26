@@ -102,7 +102,7 @@ func resp(c *gin.Context, statusCode int, tpl string, data interface{}) {
 	}
 	t := templates[tpl]
 	if t == nil {
-		c.String(500, "Template not found! Please tell this to a dev!")
+		c.String(500, "Template not found! Please report this to an Akatsuki developer!")
 		return
 	}
 	sess := getSession(c)

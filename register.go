@@ -50,6 +50,15 @@ func registerSubmit(c *gin.Context) {
 		return
 	}
 
+	/* beta keys
+	key := strings.TrimSpace(c.PostForm("key"))
+	if db.QueryRow("SELECT 1 FROM beta_keys WHERE key = ?", c.PostForm("key")).
+		Scan(new(int)) ==  sql.ErrNoRows {
+		registerResp(c, errorMessage{T(c, "Your key is invalid!")})
+		return
+	}
+	*/
+
 	// check whether an username is e.g. cookiezi, shigetora, peppy, wubwoofwolf, loctav
 	if in(strings.ToLower(username), forbiddenUsernames) {
 		registerResp(c, errorMessage{T(c, "You're not allowed to register with that username.")})
@@ -121,9 +130,12 @@ func registerSubmit(c *gin.Context) {
 	lid, _ := res.LastInsertId()
 
 	db.Exec("INSERT INTO `users_stats`(id, username, user_color, user_style, ranked_score_std, playcount_std, total_score_std, ranked_score_taiko, playcount_taiko, total_score_taiko, ranked_score_ctb, playcount_ctb, total_score_ctb, ranked_score_mania, playcount_mania, total_score_mania) VALUES (?, ?, 'black', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);", lid, username)
-
+	/* Beta Keys
+	db.Exec("UPDATE `beta_keys` set used = 1 where key = ?", key)
+	
+	// Ripple Gay Bot
 	schiavo.CMs.Send(fmt.Sprintf("User (**%s** | %s) registered from %s", username, c.PostForm("email"), clientIP(c)))
-
+	*/
 	setYCookie(int(lid), c)
 	logIP(c, int(lid))
 
