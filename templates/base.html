@@ -78,6 +78,7 @@
 			{{ .T "&copy; %d Ripple, Akatsuki, using Hanayo %s." (curryear) (version) | html }}
 			<a href="/team" title="{{ .T "Who is working on this thing?" }}"><i class="users icon"></i>{{ .T "Team" }}</a> |
 			<a href="/changelog" title="{{ .T "See what changed!" }}"><i class="bug icon"></i>{{ .T "Changelog" }}</a> |
+			<a href="https://p.datadoghq.com/sb/71577ef74-a079587e79" title="{{ .T "Akatsuki's Server Status" }}"><i class="signal icon"></i>{{ .T "Status" }}</a> |
 			<div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">
 				{{ $lang := .Context.Language }}
 				{{ with $lang }}

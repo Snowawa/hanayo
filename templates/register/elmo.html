@@ -9,7 +9,7 @@ HeadingOnRight=true
 	<div class="ui raised segments">
 		<div class="ui segment">
 			{{ $username := .RequestInfo.Username }}
-			<img src="/static/jack_black.jpg" class="ui small right floated image" alt="Jack black">
+			<img src="/static/jack_black.png" class="ui small right floated image" alt="Jack black">
 
 			<p>{{ .T "We see that you're trying to sign up while having already signed up as %s! Please note that multiaccounting is punishable, and can lead to a one month restriction!" $username }}</p>
 
@@ -21,7 +21,7 @@ HeadingOnRight=true
 					{{ .T "If you're not %s, but you're using %s's computer, please sign up on Akatsuki from your own computer." $username $username }}
 				</li>
 				<li>
-					{{ .T "If you live with %s and you don't have your own computer from which to sign up on Akatsuki, then please contact cmyuiosu@gmail.com, and we'll deal with your specific case." $username }}
+					{{ .T "If you live with %s and you don't have your own computer from which to sign up on Akatsuki, then please contact support@akatsuki.pw, and we'll deal with your specific case." $username }}
 				</li>
 			</ul>
 			
